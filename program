@@ -1,0 +1,110 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include<time.h>
+using namespace std;
+
+void test();
+int add(int x, int y);
+void deckOcards();
+
+int main()
+{
+	//************PARTE 1*****************
+	int num; float floa; char lett;
+	cout << "Saludos, bienvenidos a un programa bastante desesperante! \nEntremos a la primera parte \nEscribe 3 tipos de variables:\n";
+	cout << "Escribe tu integer: "; cin >> num;
+	cout << "Escribe tu float (o sea, un decimal): "; cin >> floa;
+	cout << "Escribe finalmente UNA letra, no te contaremos mas de una so ni lo pienses! Escribe: "; cin >> lett;
+
+	//************PARTE 2****************
+	cout << "\nParte II: ";
+	cout << "\nEscribistes lo siguiente: \nint: " << num << " \nfloat: " << floa << " \nchar: " << lett;
+
+	//************PARTE 3******************
+	char firstLet;
+	cout << "\n\nParte III: ";
+	cout << "\nPara mostrarte que grandioso es este programa. Anota la primera letra de tu nombre. Adelante: "; cin >> firstLet;
+
+	if (firstLet == 'A' || firstLet == 'a' || firstLet == 'E' || firstLet == 'e' || firstLet == 'I' || firstLet == 'i' || firstLet == 'O' || firstLet == 'o' || firstLet == 'u' || firstLet == 'U') { cout << "\nSu nombre empieza con vocal. Impresionante, no?"; }
+	else { cout << "\nQue aburrido. No usaste mi formula sofisticada. Empiezas con consonante. Boo."; }
+
+	//************PARTE 4******************
+	char loopy;
+	cout << "\n\nParte IV: ";
+	cout << "Quieres continuar el loop? Entra y para si o n para no: "; cin >> loopy; cout << endl;
+	while (loopy != 'n' && loopy != 'N') { cout << "Todavia estas entretenido con esto? Entra y para si o n para no: "; cin >> loopy; cout << endl; }
+
+	//************PARTE 5******************
+	int count;
+	cout << "\n\nParte V: ";
+	cout << "\nSabes, yo puedo contar desde el 0 mas rapido que tu. No me crees? Hasta que numero cuento? "; cin >> count;
+	for (int x = 0; x <= count; ++x) { cout << x << endl; }
+
+	//************PARTE 6******************
+	string name;
+	cout << "\n\nParte VI: ";
+	cout << "\nHumano. No he preguntado tu nombre! Como te llamas? "; cin.ignore(); getline(cin, name);
+	cout << "Un placer estar jugando con vos, " << name << ".";
+
+	//************PARTE 7******************
+	int arra[10];
+	cout << "\n\nParte VII: ";
+	cout << "\nOkay. Te tengo un juego chevere. Dame 10 numeros: ";
+	for (int i = 0; i < 10; i++) { cout << "Tu seleccion es: "; cin >> arra[i]; }
+	cout << "Tu seleccion fue: ";
+	for (int x = 0; x < 10; x++) { cout << arra[x] << ", "; }
+
+	//************PARTE 8******************
+	string line; 
+	cout << "\n\nParte VIII: ";
+	cout << "Escribe una frase: "; cin.ignore(); getline(cin, line);
+	size_t found = line.find_first_of("aeiouAEIOU"); cout << "Tu primer vocal se encuentra en el espacio (Se cuenta desde 0): " << found;
+	cout << "\nLa letra es " << line.at(found);
+
+	//************PARTE 9******************
+	cout << "\n\nParte IX: ";
+	test();
+
+	//************PARTE 10******************
+	int x, y, z;
+	cout << "\n\nParte X: ";
+	cout << "\nPara seguir mostrandote mi intelligencia infinita, dame dos numeros, te los sumo rapidisimo!";
+	cout << "\nTu primer numero es: "; cin >> x; cout << "Tu segundo numero es: "; cin >> y;
+	cout << "La suma de estos es: "; z = add(x, y); cout << z;
+
+	//************PARTE 11******************
+	cout << "\n\nParte XI:\n ";
+	deckOcards();
+
+	//**********FIN*************************
+	cout << "\nDisfrute mucho tu compa~nia, " << name;
+	cout << "\nEspero que vuelvas pronto para que juegemos de nuevo. Adios!";
+	cout << endl << endl;
+	system("pause");
+}
+
+void test() { cout << "\nEsto se esta imprimiendo desde una funcion. Que cool soy!"; }
+
+int add(int x, int y) { int r; r = x + y; return r; };
+
+void deckOcards() {
+	srand(time(NULL));
+	int draw; int sum = 0; int rando; 
+	cout << "\nCreo que ya los dos estamos cansado. Pero, un ultimo juego. Tengo un paquete de 52 cartas. Escoge las que quieras e yo adivinare cual tienes: "; cin >> draw; cout << endl;
+	if (draw >= 53) { cout << "No existen tantas cartas. Trata de nuevo: "; cin >> draw; cout << endl; }
+	
+	string deck[4] = { "diamante","trebol","corazon","pica" };
+	int number[53] = { 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10 };
+	random_shuffle(std::begin(number), std::end(number));;
+	for (int x = 0; x <= draw; x++) 
+	{
+		rando = rand() % 52 + 1;
+		if (rando <= 13) { cout << "Tu carta es " << deck[0] << " de " << number[x] << endl; sum += number[x];  }
+		else if (rando > 13 && rando <= 26) {cout << "Tu carta es " << deck[1] << " de " << number[x] << endl; sum += number[x];  }
+		else if (rando > 26 && rando <= 39) { cout << "Tu carta es " << deck[2] << " de " << number[x] << endl; sum += number[x]; }
+		else if (rando > 39 && rando <= 52) { cout << "Tu carta es " << deck[3] << " de " << number[x] << endl; sum += number[x];  }
+	}
+	cout << "\nEl suma de sus cartas es " << sum << endl << endl; 
+
+}
